@@ -1,11 +1,11 @@
 import 'package:app_menezes/core/response.dart';
 import 'package:dio/dio.dart';
 import '../../../../core/interceptor.dart';
-import '../../api/client/client_operation_endpoints.dart';
+import '../../api/clients/clients_operation_endpoints.dart';
 import '../../models/clients/create_response_model.dart';
-import 'clients_gym_datasource_abstract.dart';
+import 'clients_datasource_abstract.dart';
 
-class ClientsGymDataSourceImpl implements ClientsGymDataSourceAbstract {
+class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
   @override
   Future<DatasourceResponse> createNewClient({required CreateNewClientModel data}) async {
     final dio = Dio();
@@ -13,7 +13,7 @@ class ClientsGymDataSourceImpl implements ClientsGymDataSourceAbstract {
 
     final dataCreateInfo = data.toJson();
     final response = await dio.post(
-        ClientOperationEndpoints().getClientsOurCreateNew,
+        ClientOperationEndpoints().clientsGymEndpoint (),
         data: dataCreateInfo);
 
     if (response.statusCode == 200) {
@@ -25,7 +25,18 @@ class ClientsGymDataSourceImpl implements ClientsGymDataSourceAbstract {
 
   @override
   Future<DatasourceResponse> deleteClient({required int id}) async {
-    throw UnimplementedError();
+   final dio = Dio();
+    dio.interceptors.add(TokenInterceptor());
+
+    final response = await dio.delete(
+        ClientOperationEndpoints().deleteClientEndpoint(id),
+       );
+
+    if (response.statusCode == 200) {
+      return DatasourceResponse(data: response.data, success: true);
+    } else {
+      return DatasourceResponse(data: response.data, success: false);
+    }
   }
 
   @override
@@ -34,7 +45,7 @@ class ClientsGymDataSourceImpl implements ClientsGymDataSourceAbstract {
     dio.interceptors.add(TokenInterceptor());
 
     final response = await dio.get(
-      ClientOperationEndpoints().getClientsOurCreateNew,
+      ClientOperationEndpoints().clientsGymEndpoint()
     );
 
     if (response.statusCode == 200) {

@@ -3,7 +3,7 @@ import '../../models/clients/create_response_model.dart';
 
 
 
-abstract class ClientsGymDataSourceAbstract {
+abstract class ClientsDataSourceAbstract {
 Future <DatasourceResponse> getListClients();
 Future <DatasourceResponse> getClientWithId({ int? id});
 Future <DatasourceResponse> createNewClient({required CreateNewClientModel data});

@@ -5,11 +5,14 @@ import '../../../core/app_state.dart';
 import '../../data/models/clients/create_response_model.dart';
 import '../../data/models/clients/get_all_clients_model.dart';
 
-
 class ClientStore extends Store {
   RxNotifier<AppState> state = RxNotifier(AppState());
 
   RxNotifier<int?> id = RxNotifier<int?>(null);
+  RxNotifier<bool?> activeClient = RxNotifier<bool?>(null);
+  RxNotifier<bool?> dropdownValue = RxNotifier<bool?>(null);
+
+  RxNotifier<String?> nameClientEdit = RxNotifier<String?>(null);
 
   RxNotifier<EntityList?>? myResponseModel = RxNotifier(null);
   RxNotifier<CreateNewClientModel?>? createInfo = RxNotifier(null);
@@ -18,8 +21,11 @@ class ClientStore extends Store {
   final TextEditingController controlleTexField = TextEditingController();
   RxNotifier<String> titleDropdown = RxNotifier("Sim");
   RxNotifier<bool> boolDropdown = RxNotifier(false);
+  RxNotifier<bool> isTitleEditAlertDialog = RxNotifier(false);
 
+  String? idd;
   bool? isDeleteClient = true;
   bool? isEditClient = true;
   bool? isNewClient = true;
+  RxNotifier<bool?> isConfirmSucess = RxNotifier<bool?>(false);
 }

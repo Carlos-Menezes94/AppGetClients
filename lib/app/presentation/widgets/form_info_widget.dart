@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 
-import '../controllers/client_controller.dart';
+import '../controllers/clients_controller.dart';
 
 class AlertDialogFormWidget {
-  ClientControler controller = GetIt.I.get<ClientControler>();
+  ClientsControler controller = GetIt.I.get<ClientsControler>();
   final TextEditingController _controller1 = TextEditingController();
-  final List<String> _items = ['SIM', 'NÃO'];
   bool? _value;
   ValueChanged<bool>? onChanged;
   final _formKey = GlobalKey<FormState>();
@@ -65,7 +64,10 @@ class AlertDialogFormWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                const Text('Adicionar'),
+                                Text(!controller
+                                        .store.isTitleEditAlertDialog.value
+                                    ? "Adicionar novo cliente"
+                                    : "Editar cliente"),
                                 TextFormField(
                                   controller:
                                       controller.store.controlleTexField,
@@ -88,31 +90,37 @@ class AlertDialogFormWidget {
                                   height: 10,
                                 ),
                                 RxBuilder(builder: (context) {
+                                  _value = controller.store.activeClient.value;
                                   return Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.blue)),
-                                    child: DropdownButton<bool>(
-                                      value: _value,
-                                      hint: Text(
-                                          controller.store.titleDropdown.value),
-                                      items: [
-                                        DropdownMenuItem<bool>(
-                                          value: true,
-                                          child: Text('Sim'),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Color(0xff0bc6a5),
                                         ),
-                                        DropdownMenuItem<bool>(
-                                          value: false,
-                                          child: Text('Não'),
-                                        ),
-                                      ],
-                                      onChanged: (value) {
-                                        controller.store.boolDropdown.value =
-                                            value!;
-                                        controller.isActiveDropdown();
-                                        print(value);
-                                      },
-                                    ),
-                                  );
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: DropdownButton<bool>(
+                                        value: controller
+                                            .store.dropdownValue.value,
+                                        hint: Text('Selecione uma opção'),
+                                        items: const [
+                                          DropdownMenuItem<bool>(
+                                            value: true,
+                                            child: Text('Sim'),
+                                          ),
+                                          DropdownMenuItem<bool>(
+                                            value: false,
+                                            child: Text('Não'),
+                                          ),
+                                        ],
+                                        onChanged: (value) {
+                                          controller.store.dropdownValue.value =
+                                              value!;
+
+                                          print(
+                                              'Opção selecionada: ${controller.store.dropdownValue.value}');
+                                        },
+                                      ));
                                 })
                               ],
                             ),
@@ -123,20 +131,38 @@ class AlertDialogFormWidget {
                   );
                 }),
             actions: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cancelar'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // submit form
-                    controller.createInfo(context);
-                  }
-                },
-                child: const Text('Salvar'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                        Colors.red,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Não confirmar'),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                        Color(0xff0bc6a5),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (controller.store.isDeleteClient!) {
+                        controller.deleteClient(context);
+                      }
+                      if (controller.store.isNewClient! &&
+                          _formKey.currentState!.validate()) {
+                        controller.createInfo(context);
+                      }
+                    },
+                    child: const Text('Confirmar'),
+                  ),
+                ],
               ),
             ],
           );

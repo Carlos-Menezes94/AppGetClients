@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../app/presentation/controllers/client_controller.dart';
+import '../app/presentation/controllers/clients_controller.dart';
 
 class TokenInterceptor extends Interceptor {
-  ClientControler controller = GetIt.I.get<ClientControler>();
+  ClientsControler controller = GetIt.I.get<ClientsControler>();
 
 
 

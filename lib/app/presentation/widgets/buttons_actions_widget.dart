@@ -2,29 +2,35 @@ import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
 
-import '../controllers/client_controller.dart';
+import '../controllers/clients_controller.dart';
 
 class ButtonsActionsWidget extends StatelessWidget {
+  final int id;
+  final String name;
   final int active;
-  const ButtonsActionsWidget({super.key, required this.active});
+  const ButtonsActionsWidget(
+      {super.key, required this.id, required this.name, required this.active});
 
   @override
   Widget build(BuildContext context) {
-    ClientControler controller = GetIt.I.get<ClientControler>();
+    ClientsControler controller = GetIt.I.get<ClientsControler>();
 
     return Row(
       children: [
         IconButton(
-          icon: Icon(Icons.edit),
+          icon: const Icon(Icons.edit),
           onPressed: () {
-            controller.editClient(context); // Lógica para a ação de edição
+            controller.store.dropdownValue.value = active == 1 ? true : false;
+            controller.store.controlleTexField.text = name;
+            controller
+                .callButtonEditClient(context); // Lógica para a ação de edição
           },
         ),
         IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: () {
-            print(active);
-            controller.deleteClient(context);
+            controller.store.idd = id.toString();
+            controller.callButtonDeleteClient(context);
           },
         )
       ],
