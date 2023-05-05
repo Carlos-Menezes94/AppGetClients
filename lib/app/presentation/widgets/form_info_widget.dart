@@ -28,29 +28,6 @@ class AlertDialogFormWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Offstage(
-                            offstage: !controller.store.isEditClient!,
-                            child: Column(children: [
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: 'Nome',
-                                  border: OutlineInputBorder(),
-                                ),
-                                onChanged: (value) {
-                                  // callback para quando o valor do campo mudar
-                                },
-                              ),
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: 'Nome',
-                                  border: OutlineInputBorder(),
-                                ),
-                                onChanged: (value) {
-                                  // callback para quando o valor do campo mudar
-                                },
-                              )
-                            ]),
-                          ),
-                          Offstage(
                             offstage: !controller.store.isDeleteClient!,
                             child: Column(children: const [
                               SizedBox(
@@ -59,13 +36,12 @@ class AlertDialogFormWidget {
                             ]),
                           ),
                           Offstage(
-                            offstage: !controller.store.isNewClient!,
+                            offstage: !controller.store.formOnAlertDialog!,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(!controller
-                                        .store.isTitleEditAlertDialog.value
+                                Text(!controller.store.isEditAlertDialog.value
                                     ? "Adicionar novo cliente"
                                     : "Editar cliente"),
                                 TextFormField(
@@ -158,6 +134,9 @@ class AlertDialogFormWidget {
                       if (controller.store.isNewClient! &&
                           _formKey.currentState!.validate()) {
                         controller.createInfo(context);
+                      }
+                      if (controller.store.isEditAlertDialog.value) {
+                        controller.editInfoClient(context);
                       }
                     },
                     child: const Text('Confirmar'),

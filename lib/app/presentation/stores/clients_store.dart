@@ -14,18 +14,24 @@ class ClientStore extends Store {
 
   RxNotifier<String?> nameClientEdit = RxNotifier<String?>(null);
 
-  RxNotifier<EntityList?>? myResponseModel = RxNotifier(null);
+  RxNotifier<GetAllClientsModel?>? myResponseModel = RxNotifier(null);
+  RxNotifier<GetAllClientsModel?>? myResponseModel2 = RxNotifier(null);
+
   RxNotifier<CreateNewClientModel?>? createInfo = RxNotifier(null);
   String? token =
       "Bearer 40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8";
   final TextEditingController controlleTexField = TextEditingController();
   RxNotifier<String> titleDropdown = RxNotifier("Sim");
   RxNotifier<bool> boolDropdown = RxNotifier(false);
-  RxNotifier<bool> isTitleEditAlertDialog = RxNotifier(false);
+  RxNotifier<bool> isEditAlertDialog = RxNotifier(false);
+  RxNotifier<bool?> buttonPage = RxNotifier<bool?>(true);
+  RxNotifier<bool?> changePage = RxNotifier<bool?>(true);
 
   String? idd;
   bool? isDeleteClient = true;
   bool? isEditClient = true;
   bool? isNewClient = true;
+  bool? formOnAlertDialog = true;
+
   RxNotifier<bool?> isConfirmSucess = RxNotifier<bool?>(false);
 }

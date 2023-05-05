@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:app_menezes/app/data/repositories_impl/clients/clients_repository_impl.dart';
 import '../data/datasources/clients/clients_datasource_impl.dart';
 import '../domain/usecases/create_client_use_case.dart';
+import '../domain/usecases/put_info_client_use_case.dart';
 
 class DiContainer {
   static void start() {
@@ -20,7 +21,8 @@ class DiContainer {
           getAllClientsUseCase: GetIt.I.get<GetAllClientsUseCase>(),
           store: GetIt.I.get<ClientStore>(),
           creatInfoDataUseCase: GetIt.I.get<CreateClientUseCase>(),
-          deleteClientUseCase: GetIt.I.get<DeleteClientUseCase>()),
+          deleteClientUseCase: GetIt.I.get<DeleteClientUseCase>(),
+          putInfoClientUseCase: GetIt.I.get<PutInfoClientUseCase>()),
     );
     getIt.registerFactory(
       () => GetAllClientsUseCase(
@@ -33,6 +35,10 @@ class DiContainer {
     getIt.registerFactory(
       () =>
           DeleteClientUseCase(repository: GetIt.I.get<ClientsRepositoryImpl>()),
+    );
+    getIt.registerFactory(
+      () => PutInfoClientUseCase(
+          repository: GetIt.I.get<ClientsRepositoryImpl>()),
     );
     getIt.registerSingleton(ClientStore());
   }

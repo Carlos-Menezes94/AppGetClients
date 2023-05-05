@@ -20,8 +20,13 @@ class ButtonsActionsWidget extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.edit),
           onPressed: () {
+            controller.store.changePage.value = false;
+
+            controller.store.formOnAlertDialog = true;
             controller.store.dropdownValue.value = active == 1 ? true : false;
             controller.store.controlleTexField.text = name;
+            controller.store.idd = id.toString();
+
             controller
                 .callButtonEditClient(context); // Lógica para a ação de edição
           },
@@ -29,6 +34,8 @@ class ButtonsActionsWidget extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () {
+            controller.store.changePage.value = false;
+            controller.store.formOnAlertDialog = false;
             controller.store.idd = id.toString();
             controller.callButtonDeleteClient(context);
           },

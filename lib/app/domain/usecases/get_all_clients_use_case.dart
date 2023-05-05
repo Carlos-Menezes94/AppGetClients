@@ -8,7 +8,7 @@ class GetAllClientsUseCase  {
   final ClientsRepositoryImpl repository;
 
 
-    Future<Either<Failure, EntityList >> getListClients(int? id) async {
-    return repository.getListClients(id);
+    Future<Either<Failure, GetAllClientsModel >> getListClients(int? id, bool? changePage) async {
+    return repository.getListClients(id,changePage);
   }
 }
