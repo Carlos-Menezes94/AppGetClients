@@ -4,10 +4,12 @@ import 'package:app_menezes/core/controller.dart';
 import 'package:app_menezes/app/domain/usecases/get_all_clients_use_case.dart';
 import 'package:app_menezes/app/presentation/stores/clients_store.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import '../../../core/app_state.dart';
 import '../../data/models/clients/create_response_model.dart';
 import '../../data/models/clients/edit_info_client_model.dart';
 import '../../domain/usecases/create_client_use_case.dart';
+import '../../services/auth_service.dart';
 import '../widgets/form_info_widget.dart';
 
 class ClientsControler extends Controller {
@@ -26,6 +28,7 @@ class ClientsControler extends Controller {
         _deleteClientUseCase = deleteClientUseCase,
         _creatInfoDataUseCase = creatInfoDataUseCase,
         _getAllClientsUseCase = getAllClientsUseCase;
+  AuthService authService = GetIt.I.get<AuthService>();
 
   Future<void> getListClients() async {
     store.state.value = AppState.loading();
@@ -143,5 +146,53 @@ class ClientsControler extends Controller {
 
   void pageTwoClients() {
     if (store.myResponseModel!.value!.data.entities.length > 10) {}
+  }
+
+  void setFormAction(bool action) {
+    store.isLogin = action;
+    if (store.isLogin) {
+      store.titulo.value = "Bem-vindo";
+      store.actionButton.value = "Login";
+      store.toggleButton.value = "Ainda nao tem conta, cadastre-se agora!";
+    } else {
+      store.titulo.value = "Crie sua conta";
+      store.actionButton.value = "Cadastrar";
+      store.toggleButton.value = "Voltar ao Login";
+    }
+  }
+
+  void login(BuildContext? context) async {
+    store.state.value = AppState.loading();
+
+    try {
+      await authService.login(
+        store.passwordText!,
+        store.emailText!,
+      );
+      store.state.value = AppState.success();
+    } catch (e) {
+      store.state.value = AppState.error();
+
+      ScaffoldMessenger.of(context!)
+          .showSnackBar(SnackBar(content: Text("Erro")));
+    }
+  }
+
+  void register(BuildContext? context) {
+    try {
+      authService.register(
+        store.passwordText!,
+        store.emailText!,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context!)
+          .showSnackBar(SnackBar(content: Text("Erro")));
+    }
+  }
+
+  void logout() {
+    Future.delayed(Duration(seconds: 3), () {
+    });
+    authService.logout();
   }
 }

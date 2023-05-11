@@ -34,7 +34,17 @@ class _HomePageState extends State<HomePage> {
           valueListenable: controller.store.state,
           builder: (context, state, child) {
             return Scaffold(
-                appBar: AppBar(backgroundColor: Color(0xff0bc6a5)),
+                appBar: AppBar(
+                  backgroundColor: Color(0xff0bc6a5),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.logout),
+                      onPressed: () {
+                        controller.logout();
+                      },
+                    )
+                  ],
+                ),
                 floatingActionButton: FloatingActionButton(
                   backgroundColor: const Color(0xff0bc6a5),
                   onPressed: () {
@@ -48,9 +58,9 @@ class _HomePageState extends State<HomePage> {
                 body: RxBuilder(builder: (context) {
                   print("teste");
                   if (controller.store.state.value.isLoading()) {
-                   return Container(
-                      alignment: Alignment.center,
-                      child: const CircularProgressIndicator());
+                    return Container(
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator());
                   }
 
                   if (controller.store.isConfirmSucess.value!) {
@@ -61,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.fill, repeat: true, animate: true)
                         ]);
                   }
-        
+
                   if (controller.store.state.value.hasSuccess()) {
                     return Column(
                       children: [

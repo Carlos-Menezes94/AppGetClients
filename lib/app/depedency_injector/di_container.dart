@@ -2,6 +2,7 @@ import 'package:app_menezes/app/domain/usecases/delete_client_use_case.dart';
 import 'package:app_menezes/app/domain/usecases/get_all_clients_use_case.dart';
 import 'package:app_menezes/app/presentation/controllers/clients_controller.dart';
 import 'package:app_menezes/app/presentation/stores/clients_store.dart';
+import 'package:app_menezes/app/services/auth_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:app_menezes/app/data/repositories_impl/clients/clients_repository_impl.dart';
 import '../data/datasources/clients/clients_datasource_impl.dart';
@@ -11,6 +12,8 @@ import '../domain/usecases/put_info_client_use_case.dart';
 class DiContainer {
   static void start() {
     GetIt getIt = GetIt.instance;
+
+    getIt.registerSingleton(AuthService());
 
     getIt.registerFactory(() => ClientsDataSourceImpl());
     getIt.registerFactory(() => ClientsRepositoryImpl(

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "37403988148",
+    "project_id": "app-list-clients",
+    "storage_bucket": "app-list-clients.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37403988148:android:9b3549ee5eff66b6e907e1",
+        "android_client_info": {
+          "package_name": "com.example.app_menezes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37403988148-896kdmtd1nlbab7dmbi0o0npnk6ll00d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgTrohwiDeGcV3D7kg4mLMbeXTIhGJF-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37403988148-896kdmtd1nlbab7dmbi0o0npnk6ll00d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

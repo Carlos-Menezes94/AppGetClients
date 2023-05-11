@@ -32,6 +32,17 @@ class ClientStore extends Store {
   bool? isEditClient = true;
   bool? isNewClient = true;
   bool? formOnAlertDialog = true;
+  GlobalKey<FormState>? formKey;
+  TextEditingController? emailLoginController;
+  TextEditingController? passwordLoginController;
+  RxNotifier<String?> titulo = RxNotifier<String?>(null);
+  RxNotifier<String?> actionButton = RxNotifier<String?>(null);
+  RxNotifier<String?> toggleButton = RxNotifier<String?>(null);
+
+  bool isLogin = true;
+
+  String? emailText;
+  String? passwordText;
 
   RxNotifier<bool?> isConfirmSucess = RxNotifier<bool?>(false);
 }
