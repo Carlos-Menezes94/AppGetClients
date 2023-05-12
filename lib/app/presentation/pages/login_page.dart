@@ -23,13 +23,12 @@ class LoginPageState extends State<LoginPage> {
 
   ClientsControler controller = GetIt.I.get<ClientsControler>();
 
-
-
   @override
   Widget build(BuildContext context) {
     return RxBuilder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xff0bc6a5),
           title: Text(controller.store.actionButton.value!),
         ),
         body: Center(
@@ -85,9 +84,13 @@ class LoginPageState extends State<LoginPage> {
                   ),
                   RxBuilder(builder: (context) {
                     if (controller.store.state.value.isLoading()) {
-                    return  CircularProgressIndicator();
+                      return CircularProgressIndicator();
                     }
                     return ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xff0bc6a5)),
+                      ),
                       onPressed: () {
                         if (controller.store.isLogin) {
                           controller.login(context);
