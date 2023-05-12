@@ -1,42 +1,39 @@
 
-Sobre
-Aplicativo criado para estudos e praticas.
+## Descrição
 
-O projeto foi desenvolvido utilizando a linguagem Dart e o framework Flutter, seguindo os princípios do SOLID e Clean Architecture. Foram utilizados os pacotes ValueNotifier, Get It e Dio.
+Este projeto foi desenvolvido utilizando a linguagem Dart e o framework Flutter, seguindo os princípios do SOLID e Clean Architecture. Ele possui uma tela de login que utiliza a plataforma Firebase para autenticação e cadastro de usuários. Após o login bem sucedido, o usuário é direcionado para a tela Home, que consome uma API e exibe uma lista e funcionalidades para realizar operações CRUD nos botões.
 
-O aplicativo consiste em uma tela de login que utiliza a plataforma do Firebase para realizar o login e cadastro dos usuários. Após o login, o usuário é direcionado para a tela inicial, que consome uma API e exibe uma lista de itens, permitindo as operações de CRUD.
+## Como Executar
 
-Tecnologias Utilizadas:
-Dart
-Flutter
-Firebase
-Get It
-Dio
-O projeto foi desenvolvido utilizando a arquitetura Clean Architecture, que tem como objetivo separar as responsabilidades do projeto em camadas, facilitando a manutenção e testabilidade do código.
+1. Faça o clone do repositório
+2. Crie um novo projeto no Firebase e siga as instruções para configurar o arquivo google-services.json.
+3. Abra o projeto no seu editor de código preferido
+4. Execute o comando `flutter run` no terminal
 
-As camadas utilizadas no projeto foram:
+## Funcionalidades
 
-Presentation
-Domain
-Data
-A camada de Presentation é responsável pela interface do usuário, incluindo as telas e widgets do aplicativo.
+- Tela de Login: permite logar e cadastrar utilizando a plataforma do Firebase.
+- Tela Home: consome a API e exibe uma lista, podendo realizar as operações do CRUD.
 
-A camada de Domain contém as regras de negócio da aplicação, as interfaces dos repositórios e os modelos de dados.
+## Tecnologias Utilizadas
 
-A camada de Data é responsável pelo acesso aos dados, incluindo a implementação dos repositórios e a comunicação com as APIs.
+- Dart
+- Flutter
+- Value Notify
+- Get It
+- Dio
+- RxBuilder
+- Firebase
 
-Princípios Utilizados:
-O projeto segue os princípios do SOLID (Single Responsibility Principle, Open/Closed Principle, Liskov Substitution Principle, Interface Segregation Principle, Dependency Inversion Principle), que são considerados boas práticas de desenvolvimento de software.
+## Arquitetura Utilizada
 
-Pacotes Utilizados:
-ValueNotifier
-O pacote ValueNotifier é utilizado para atualizar a interface do usuário quando há mudanças nos dados do aplicativo.
+- Clean Architecture
 
-Get It
-O pacote Get It é utilizado para gerenciamento de dependências.
+## Princípios Utilizados
 
-Dio
-O pacote Dio é utilizado para comunicação com APIs.
+- SOLID
 
-Como Instalar
-Realizar o clone do projeto e atualizar o key API do Firebase.
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais informações.
