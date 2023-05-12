@@ -17,20 +17,13 @@ class LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
-    controller.setFormAction(true);
+    // controller.setFormAction(true);
     super.initState();
   }
 
   ClientsControler controller = GetIt.I.get<ClientsControler>();
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // Here you can add your code to validate the user's email and password.
-      // If everything is correct, you can redirect the user to the next page.
-      // If something is wrong, you can show an error message.
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {

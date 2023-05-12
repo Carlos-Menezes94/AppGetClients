@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                       icon: Icon(Icons.logout),
                       onPressed: () {
-                        controller.logout();
+                        controller.logout(context);
                       },
                     )
                   ],

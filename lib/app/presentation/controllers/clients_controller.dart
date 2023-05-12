@@ -1,3 +1,4 @@
+
 import 'package:app_menezes/app/domain/usecases/delete_client_use_case.dart';
 import 'package:app_menezes/app/domain/usecases/put_info_client_use_case.dart';
 import 'package:app_menezes/core/controller.dart';
@@ -148,7 +149,8 @@ class ClientsControler extends Controller {
     if (store.myResponseModel!.value!.data.entities.length > 10) {}
   }
 
-  void setFormAction(bool action) {
+  void setFormAction(bool action) {    
+
     store.isLogin = action;
     if (store.isLogin) {
       store.titulo.value = "Bem-vindo";
@@ -161,19 +163,18 @@ class ClientsControler extends Controller {
     }
   }
 
-  void login(BuildContext? context) async {
+  void login(BuildContext context) async {
     store.state.value = AppState.loading();
 
     try {
       await authService.login(
         store.passwordText!,
-        store.emailText!,
+        store.emailText!,context
       );
-      store.state.value = AppState.success();
     } catch (e) {
       store.state.value = AppState.error();
 
-      ScaffoldMessenger.of(context!)
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Erro")));
     }
   }
@@ -190,9 +191,9 @@ class ClientsControler extends Controller {
     }
   }
 
-  void logout() {
+  void logout(BuildContext context) {
     Future.delayed(Duration(seconds: 3), () {
     });
-    authService.logout();
+    authService.logout(context);
   }
 }
