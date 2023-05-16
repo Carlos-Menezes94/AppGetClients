@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 
-import '../../../core/app_state.dart';
 import '../controllers/clients_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,6 +26,7 @@ class LoginPageState extends State<LoginPage> {
     return RxBuilder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Color(0xff0bc6a5),
           title: Text(controller.store.actionButton.value!),
         ),

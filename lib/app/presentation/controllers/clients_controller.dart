@@ -1,4 +1,3 @@
-
 import 'package:app_menezes/app/domain/usecases/delete_client_use_case.dart';
 import 'package:app_menezes/app/domain/usecases/put_info_client_use_case.dart';
 import 'package:app_menezes/core/controller.dart';
@@ -14,7 +13,7 @@ import '../../services/auth_service.dart';
 import '../widgets/form_info_widget.dart';
 
 class ClientsControler extends Controller {
-  final ClientStore store;
+  late final ClientStore store;
   final GetAllClientsUseCase _getAllClientsUseCase;
   final CreateClientUseCase _creatInfoDataUseCase;
   final DeleteClientUseCase _deleteClientUseCase;
@@ -149,15 +148,14 @@ class ClientsControler extends Controller {
     if (store.myResponseModel!.value!.data.entities.length > 10) {}
   }
 
-  void setFormAction(bool action) {    
-
+  void setFormAction(bool action) {
     store.isLogin = action;
     if (store.isLogin) {
-      store.titulo.value = "Bem-vindo";
+      store.title.value = "Bem-vindo";
       store.actionButton.value = "Login";
       store.toggleButton.value = "Ainda nao tem conta, cadastre-se agora!";
     } else {
-      store.titulo.value = "Crie sua conta";
+      store.title.value = "Crie sua conta";
       store.actionButton.value = "Cadastrar";
       store.toggleButton.value = "Voltar ao Login";
     }
@@ -167,10 +165,7 @@ class ClientsControler extends Controller {
     store.state.value = AppState.loading();
 
     try {
-      await authService.login(
-        store.passwordText!,
-        store.emailText!,context
-      );
+      await authService.login(store.passwordText!, store.emailText!, context);
     } catch (e) {
       store.state.value = AppState.error();
 
@@ -192,8 +187,12 @@ class ClientsControler extends Controller {
   }
 
   void logout(BuildContext context) {
-    Future.delayed(Duration(seconds: 3), () {
-    });
+    resetInfoAuth();
     authService.logout(context);
+  }
+
+  void resetInfoAuth() {
+    store.emailText = "";
+    store.passwordText = "";
   }
 }

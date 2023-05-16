@@ -6,8 +6,6 @@ import '../controllers/clients_controller.dart';
 
 class AlertDialogFormWidget {
   ClientsControler controller = GetIt.I.get<ClientsControler>();
-  final TextEditingController _controller1 = TextEditingController();
-  bool? _value;
   ValueChanged<bool>? onChanged;
   final _formKey = GlobalKey<FormState>();
 
@@ -66,7 +64,6 @@ class AlertDialogFormWidget {
                                   height: 10,
                                 ),
                                 RxBuilder(builder: (context) {
-                                  _value = controller.store.activeClient.value;
                                   return Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(

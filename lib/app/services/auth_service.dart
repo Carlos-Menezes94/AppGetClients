@@ -44,7 +44,7 @@ class AuthService extends ChangeNotifier {
 
   login(String password, String email, BuildContext context) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: "ingrid11@gmail.com", password: "Smile@21");
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
 
       _getUser();
          Navigator.push(

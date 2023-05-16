@@ -1,7 +1,6 @@
 import 'package:app_menezes/app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:rx_notifier/rx_notifier.dart';
 
 import '../../../core/app_state.dart';
 import '../controllers/clients_controller.dart';

@@ -1,10 +1,6 @@
 import 'package:app_menezes/core/assset_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:rx_notifier/rx_notifier.dart';
 
 class ConfirmActionPage extends StatefulWidget {
   const ConfirmActionPage({super.key});

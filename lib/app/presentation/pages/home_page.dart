@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context, state, child) {
             return Scaffold(
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   backgroundColor: Color(0xff0bc6a5),
                   actions: <Widget>[
                     IconButton(
@@ -107,13 +108,13 @@ class _HomePageState extends State<HomePage> {
                               1),
                           child: ElevatedButton(
                             onPressed: () {
-                              controller.getListClients();
                               controller.store.changePage.value =
                                   !controller.store.changePage.value!;
+                              controller.getListClients();
                             },
                             child: Text(!controller.store.changePage.value!
-                                ? "Pagina 1"
-                                : "Pagina 2"),
+                                ? "Pagina 2"
+                                : "Pagina 1"),
                           ),
                         ),
                       ],

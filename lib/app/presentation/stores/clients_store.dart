@@ -35,7 +35,7 @@ class ClientStore extends Store {
   GlobalKey<FormState>? formKey;
   TextEditingController? emailLoginController;
   TextEditingController? passwordLoginController;
-  RxNotifier<String?> titulo = RxNotifier<String?>("Bem-vindo");
+  RxNotifier<String?> title = RxNotifier<String?>("Bem-vindo");
   RxNotifier<String?> actionButton = RxNotifier<String?>("Login");
   RxNotifier<String?> toggleButton = RxNotifier<String?>("Ainda nao tem conta, cadastre-se agora!");
 
