@@ -2,7 +2,7 @@ import 'package:app_menezes/app/domain/failures/cant_get_client_not_found_failur
 import 'package:app_menezes/core/failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../../domain/repositories_abst/client_repository_abstract.dart';
-import '../../datasources/clients/clients_datasource_impl.dart';
+import '../../datasources/clients/clients_data_source_impl.dart';
 import '../../models/clients/create_response_model.dart';
 import '../../models/clients/edit_info_client_model.dart';
 import '../../models/clients/get_all_clients_model.dart';

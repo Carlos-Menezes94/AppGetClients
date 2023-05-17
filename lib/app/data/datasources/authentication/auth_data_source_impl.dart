@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'auth_data_source_abstract.dart';
 
-class ClientsDataSourceImpl implements AuthDataSourceAbstract {
+class AuthDataSourceImpl implements AuthDataSourceAbstract {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override

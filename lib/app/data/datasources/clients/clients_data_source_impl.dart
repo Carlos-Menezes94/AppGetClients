@@ -4,11 +4,11 @@ import '../../../../core/interceptor.dart';
 import '../../api/clients/clients_operation_endpoints.dart';
 import '../../models/clients/create_response_model.dart';
 import '../../models/clients/edit_info_client_model.dart';
-import 'clients_datasource_abstract.dart';
+import 'clients_data_source_abstract.dart';
 
 class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
   @override
-  Future<DatasourceResponse> createNewClient(
+  Future<DataSourceResponse> createNewClient(
       {required CreateNewClientModel data}) async {
     final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
@@ -20,14 +20,14 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
         data: dataCreateInfo);
 
     if (response.statusCode == 200) {
-      return DatasourceResponse(data: response.data["data"], success: true);
+      return DataSourceResponse(data: response.data["data"], success: true);
     } else {
-      return DatasourceResponse(data: response.data["data"], success: false);
+      return DataSourceResponse(data: response.data["data"], success: false);
     }
   }
 
   @override
-  Future<DatasourceResponse> deleteClient({required int id}) async {
+  Future<DataSourceResponse> deleteClient({required int id}) async {
     final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
 
@@ -36,14 +36,14 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
     );
 
     if (response.statusCode == 200) {
-      return DatasourceResponse(data: response.data, success: true);
+      return DataSourceResponse(data: response.data, success: true);
     } else {
-      return DatasourceResponse(data: response.data, success: false);
+      return DataSourceResponse(data: response.data, success: false);
     }
   }
 
   @override
-  Future<DatasourceResponse> getClientWithId(
+  Future<DataSourceResponse> getClientWithId(
       {int? id, bool? changePage}) async {
 
 
@@ -55,22 +55,22 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
         queryParameters: {"page": changePage! ? 1 : 2});
 
     if (response.statusCode == 200) {
-      return DatasourceResponse(
+      return DataSourceResponse(
           data: response.data, success: true);
     } else {
-      return DatasourceResponse(
+      return DataSourceResponse(
           data: response.data, success: false);
     }
   }
 
   @override
-  Future<DatasourceResponse> getListClients() {
+  Future<DataSourceResponse> getListClients() {
     // TODO: implement getListInfos
     throw UnimplementedError();
   }
 
   @override
-  Future<DatasourceResponse> putInfoClient(
+  Future<DataSourceResponse> putInfoClient(
       {required EditInfoModel data, required int id}) async {
     final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
@@ -81,9 +81,9 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
         data: dataEditInfo);
 
     if (response.statusCode == 200) {
-      return DatasourceResponse(data: response.data, success: true);
+      return DataSourceResponse(data: response.data, success: true);
     } else {
-      return DatasourceResponse(data: response.data, success: false);
+      return DataSourceResponse(data: response.data, success: false);
     }
   }
 }
