@@ -1,5 +1,5 @@
-class DatasourceResponse<T> {
-  DatasourceResponse({
+class DataSourceResponse<T> {
+  DataSourceResponse({
     required this.success,
     required this.data,
   });
