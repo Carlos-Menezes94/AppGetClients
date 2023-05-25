@@ -12,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     // controller.setFormAction(true);
@@ -34,7 +33,7 @@ class LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
-              key: _formKey,
+              key: controller.store.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

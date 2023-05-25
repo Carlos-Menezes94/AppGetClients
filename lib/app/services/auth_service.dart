@@ -19,8 +19,7 @@ class AuthService extends ChangeNotifier {
     });
   }
 
-
-  _getUser(){
+  _getUser() {
     user = _auth.currentUser;
     notifyListeners();
   }
@@ -44,18 +43,24 @@ class AuthService extends ChangeNotifier {
 
   login(String password, String email, BuildContext context) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      final response = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
 
       _getUser();
-         Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const AuthCheck()),
-    );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AuthCheck()),
+      );
+      return response;
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
         throw AuthException("E-mail não encontrado");
       } else if (e.code == "wrong-password") {
         throw AuthException("Senha incorretao");
+      } else if (e.code.contains("empty or null")) {
+        throw AuthException("Campos vazios");
+      } else if (e.code == "invalid-email") {
+        throw AuthException("E-mail invalido");
       }
     }
   }

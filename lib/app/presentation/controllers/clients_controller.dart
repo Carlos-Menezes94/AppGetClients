@@ -161,18 +161,23 @@ class ClientsControler extends Controller {
     }
   }
 
-  void login(BuildContext context) async {
-    store.state.value = AppState.loading();
+void login(BuildContext context) async {
+  store.state.value = AppState.loading();
 
-    try {
-      await authService.login(store.passwordText!, store.emailText!, context);
-    } catch (e) {
-      store.state.value = AppState.error();
+  try {
+    await authService.login(store.passwordText!, store.emailText!, context);
+    store.state.value = AppState.success();
+  } catch (e) {
+    store.state.value = AppState.error();
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Erro")));
+    if (e is AuthException) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ocorreu um erro durante o login.')));
     }
   }
+}
+
 
   void register(BuildContext? context) {
     try {
