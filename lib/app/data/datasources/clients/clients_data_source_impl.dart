@@ -7,10 +7,11 @@ import '../../models/clients/edit_info_client_model.dart';
 import 'clients_data_source_abstract.dart';
 
 class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
+  final dio = Dio();
+
   @override
   Future<DataSourceResponse> createNewClient(
       {required CreateNewClientModel data}) async {
-    final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
 
     final dataCreateInfo = data.toJson();
@@ -28,7 +29,6 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
 
   @override
   Future<DataSourceResponse> deleteClient({required int id}) async {
-    final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
 
     final response = await dio.delete(
@@ -45,9 +45,6 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
   @override
   Future<DataSourceResponse> getClientWithId(
       {int? id, bool? changePage}) async {
-
-
-    final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
 
     final response = await dio.get(
@@ -55,11 +52,9 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
         queryParameters: {"page": changePage! ? 1 : 2});
 
     if (response.statusCode == 200) {
-      return DataSourceResponse(
-          data: response.data, success: true);
+      return DataSourceResponse(data: response.data, success: true);
     } else {
-      return DataSourceResponse(
-          data: response.data, success: false);
+      return DataSourceResponse(data: response.data, success: false);
     }
   }
 
@@ -72,7 +67,6 @@ class ClientsDataSourceImpl implements ClientsDataSourceAbstract {
   @override
   Future<DataSourceResponse> putInfoClient(
       {required EditInfoModel data, required int id}) async {
-    final dio = Dio();
     dio.interceptors.add(TokenInterceptor());
 
     final dataEditInfo = data.toJson();
