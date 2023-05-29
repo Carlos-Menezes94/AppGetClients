@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   @override
   void initState() {
-    // controller.setFormAction(true);
     super.initState();
   }
 
@@ -27,7 +26,7 @@ class LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Color(0xff0bc6a5),
-          title: Text(controller.store.actionButton.value!),
+          title: Center(child: Text(controller.store.actionButton.value!)),
         ),
         body: Center(
           child: Padding(
@@ -41,8 +40,9 @@ class LoginPageState extends State<LoginPage> {
                     controller: controller.store.emailLoginController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: 'Email',
-                    ),
+                        labelText: 'Email',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your email';
@@ -53,14 +53,8 @@ class LoginPageState extends State<LoginPage> {
                       controller.store.emailText = value;
                       print(value);
                     },
-                    // onChanged: (value) {
-                    //   controller.store.senhaLoginController!.text = value;
-                    // },
-                    // onSaved: (value) {
-                    //   controller.store.emailLoginController!.text =
-                    //       value!.trim();
-                    // },
                   ),
+                  SizedBox(height: 8),
                   TextFormField(
                     controller: controller.store.passwordLoginController,
                     obscureText: true,
@@ -68,8 +62,9 @@ class LoginPageState extends State<LoginPage> {
                       controller.store.passwordText = value;
                     },
                     decoration: InputDecoration(
-                      labelText: 'Password',
-                    ),
+                        labelText: 'Password',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your password';
