@@ -27,10 +27,17 @@ class AlertDialogFormWidget {
                         children: [
                           Offstage(
                             offstage: !controller.store.isDeleteClient!,
-                            child: Column(children: const [
+                            child: Column(children: [
                               SizedBox(
-                                  child: Text(
-                                      "Você CONFIRMA que deseja deletar esse cliente?"))
+                                child: Text(
+                                    "Você CONFIRMA que deseja deletar esse cliente?"),
+                              ),
+                              SizedBox(height: 50),
+                              Icon(
+                                Icons.warning,
+                                color: Colors.yellowAccent.shade400,
+                                size: 110,
+                              ),
                             ]),
                           ),
                           Offstage(

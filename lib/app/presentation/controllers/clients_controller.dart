@@ -10,7 +10,7 @@ import '../../data/models/clients/create_response_model.dart';
 import '../../data/models/clients/edit_info_client_model.dart';
 import '../../domain/usecases/create_client_use_case.dart';
 import '../../services/auth_service.dart';
-import '../widgets/form_info_widget.dart';
+import '../widgets/alert_dialog_form_widget.dart';
 
 class ClientsControler extends Controller {
   late final ClientStore store;

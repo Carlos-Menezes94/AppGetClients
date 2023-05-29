@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context, state, child) {
             return Scaffold(
                 appBar: AppBar(
+                  title: Center(child: Text("Home")),
                   automaticallyImplyLeading: false,
                   backgroundColor: Color(0xff0bc6a5),
                   actions: <Widget>[
@@ -57,7 +58,6 @@ class _HomePageState extends State<HomePage> {
                   child: Icon(Icons.add),
                 ),
                 body: RxBuilder(builder: (context) {
-                  print("teste");
                   if (controller.store.state.value.isLoading()) {
                     return Container(
                         alignment: Alignment.center,
@@ -82,21 +82,39 @@ class _HomePageState extends State<HomePage> {
                                 .data.entities.length,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(controller.store.myResponseModel!
-                                        .value!.data.entities[index].name),
-                                    ButtonsActionsWidget(
-                                      name: controller.store.myResponseModel!
-                                          .value!.data.entities[index].name,
-                                      id: controller.store.myResponseModel!
-                                          .value!.data.entities[index].id,
-                                      active: controller.store.myResponseModel!
-                                          .value!.data.entities[index].active,
-                                    )
-                                  ],
+                                title: Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 6),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(controller.store.myResponseModel!
+                                            .value!.data.entities[index].name),
+                                        ButtonsActionsWidget(
+                                          name: controller
+                                              .store
+                                              .myResponseModel!
+                                              .value!
+                                              .data
+                                              .entities[index]
+                                              .name,
+                                          id: controller.store.myResponseModel!
+                                              .value!.data.entities[index].id,
+                                          active: controller
+                                              .store
+                                              .myResponseModel!
+                                              .value!
+                                              .data
+                                              .entities[index]
+                                              .active,
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             },
@@ -112,6 +130,8 @@ class _HomePageState extends State<HomePage> {
                                   !controller.store.changePage.value!;
                               controller.getListClients();
                             },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xff0bc6a5)),
                             child: Text(!controller.store.changePage.value!
                                 ? "Pagina 2"
                                 : "Pagina 1"),

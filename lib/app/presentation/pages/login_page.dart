@@ -51,7 +51,6 @@ class LoginPageState extends State<LoginPage> {
                     },
                     onChanged: (value) {
                       controller.store.emailText = value;
-                      print(value);
                     },
                   ),
                   SizedBox(height: 8),

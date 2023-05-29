@@ -27,8 +27,7 @@ class ButtonsActionsWidget extends StatelessWidget {
             controller.store.controlleTexField.text = name;
             controller.store.idd = id.toString();
 
-            controller
-                .callButtonEditClient(context); // Lógica para a ação de edição
+            controller.callButtonEditClient(context);
           },
         ),
         IconButton(
